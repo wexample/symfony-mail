@@ -6,6 +6,9 @@ use LogicException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\TransportInterface;
+use Symfony\Component\Mime\Address;
+use Wexample\SymfonyMail\Interface\MailRecipientInterface;
+use Wexample\SymfonyTranslations\Interface\HasLocaleInterface;
 use Wexample\SymfonyTranslations\Translation\Translator;
 
 /**
@@ -86,5 +89,23 @@ class MailSenderService
         } finally {
             $this->translator->revertDomain(Translator::DOMAIN_TYPE_MAIL);
         }
+    }
+
+    /**
+     * Sends the mail to this recipient, in its language when it has one.
+     *
+     * @throws LogicException for a recipient without an address
+     */
+    public function sendTo(
+        MailRecipientInterface $recipient,
+        TemplatedEmail $email
+    ): ?SentMessage {
+        $address = $recipient->getEmail()
+            ?? throw new LogicException('A mail recipient has an address.');
+
+        return $this->send(
+            $email->to(new Address($address)),
+            $recipient instanceof HasLocaleInterface ? $recipient->getLocale() : null
+        );
     }
 }

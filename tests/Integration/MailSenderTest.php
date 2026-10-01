@@ -5,7 +5,10 @@ namespace Wexample\SymfonyMail\Tests\Integration;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Wexample\SymfonyMail\Service\MailSenderService;
+use LogicException;
 use Wexample\SymfonyMail\Tests\Fixtures\Log\RecordingLogger;
+use Wexample\SymfonyMail\Tests\Fixtures\Recipient\Account;
+use Wexample\SymfonyMail\Tests\Fixtures\Recipient\Contact;
 use Wexample\SymfonyMail\Tests\Fixtures\Transport\RefusingTransport;
 use Wexample\SymfonyTranslations\Translation\Translator;
 
@@ -78,6 +81,35 @@ class MailSenderTest extends AbstractMailboxTestCase
         $this->assertSame('Hello', $this->getMailbox()->last()->subject);
     }
 
+    public function testARecipientReceivesItsMailsInItsOwnLanguage(): void
+    {
+        $this->getTranslator()->setLocale('en');
+
+        $this->getSender()->sendTo((new Account('zoe@app.test'))->setLocale('fr'), $this->buildGreeting(false));
+
+        $mail = $this->getMailbox()->last();
+        $this->assertSame(['zoe@app.test'], $mail->recipients);
+        $this->assertSame('Bonjour', $mail->subject);
+    }
+
+    public function testARecipientWithoutALanguageReceivesTheDefaultOne(): void
+    {
+        $this->getTranslator()->setLocale('fr');
+
+        $this->getSender()->sendTo(new Account('zoe@app.test'), $this->buildGreeting(false));
+        $this->getSender()->sendTo(new Contact('bob@app.test'), $this->buildGreeting(false));
+
+        $this->assertSame('Hello', $this->getMailbox()->last('zoe@app.test')->subject);
+        $this->assertSame('Hello', $this->getMailbox()->last('bob@app.test')->subject);
+    }
+
+    public function testARecipientWithoutAnAddressIsRefused(): void
+    {
+        $this->expectException(LogicException::class);
+
+        $this->getSender()->sendTo(new Contact(null), $this->buildGreeting(false));
+    }
+
     public function testATextOnlyMailIsSentWithoutTheLayout(): void
     {
         $this->getSender()->send(
@@ -119,10 +151,11 @@ class MailSenderTest extends AbstractMailboxTestCase
         }
     }
 
-    private function buildGreeting(): TemplatedEmail
+    private function buildGreeting(bool $addressed = true): TemplatedEmail
     {
-        return (new TemplatedEmail())
-            ->to('ada@app.test')
+        $email = $addressed ? (new TemplatedEmail())->to('ada@app.test') : new TemplatedEmail();
+
+        return $email
             ->htmlTemplate('@front/mails/greeting.html.twig')
             ->context([
                 'name' => 'Ada',

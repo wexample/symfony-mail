@@ -67,6 +67,20 @@ class MailboxTransportTest extends AbstractMailboxTestCase
         );
     }
 
+    public function testALinkWrittenWithItsEntitiesInTheTextIsTheSameLink(): void
+    {
+        static::getContainer()->get('test.mailer')->send(
+            (new Email())
+                ->from('noreply@app.test')
+                ->to('ada@app.test')
+                ->subject('Sign in')
+                ->html('<a href="https://app.test/login?user=ada&amp;hash=x">https://app.test/login?user=ada&amp;hash=x</a>')
+                ->text('https://app.test/login?user=ada&amp;hash=x')
+        );
+
+        $this->assertSame(['https://app.test/login?user=ada&hash=x'], $this->getMailbox()->last()->links);
+    }
+
     public function testPurgeEmptiesTheMailbox(): void
     {
         $this->sendWelcome('ada@app.test');

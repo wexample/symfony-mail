@@ -254,8 +254,12 @@ class MailboxService
             }
         }
 
+        // A text part drawn from HTML by a converter that only strips the
+        // tags still carries its entities: `&amp;` between two parameters.
         if (null !== $text && preg_match_all('#https?://[^\s<>"\']+#i', $text, $matches)) {
-            array_push($links, ...$matches[0]);
+            foreach ($matches[0] as $link) {
+                $links[] = html_entity_decode($link, ENT_QUOTES | ENT_HTML5);
+            }
         }
 
         return array_values(array_unique(array_filter(

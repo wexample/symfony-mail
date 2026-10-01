@@ -23,6 +23,11 @@ class AppKernel extends AbstractFixtureKernel
         ];
     }
 
+    protected function getRoutesControllersDir(): ?string
+    {
+        return __DIR__.'/Controller';
+    }
+
     protected function getConfigFiles(): array
     {
         return [

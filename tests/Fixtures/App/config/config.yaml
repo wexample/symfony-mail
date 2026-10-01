@@ -1,0 +1,10 @@
+framework:
+  mailer:
+    dsn: 'mailbox://default'
+
+services:
+  # Nothing in the fixture app uses the mailer, which the container would
+  # otherwise remove: the tests send through it.
+  test.mailer:
+    alias: Symfony\Component\Mailer\MailerInterface
+    public: true

@@ -1,0 +1,7 @@
+en:
+  subject: Notice
+  body: A text-only notice.
+
+fr:
+  subject: Avis
+  body: Un avis en texte seul.

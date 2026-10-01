@@ -4,6 +4,16 @@ services:
         autoconfigure: true
         public: false
 
+    Wexample\SymfonyMail\Service\MailSenderService:
+        arguments:
+            $layout: '%wexample_symfony_mail.layout%'
+            $textLayout: '%wexample_symfony_mail.text_layout%'
+            $appName: '%wexample_symfony_mail.app_name%'
+            $defaultLocale: '%kernel.default_locale%'
+
+    Wexample\SymfonyMail\Twig\:
+        resource: '../../Twig'
+
     Wexample\SymfonyMail\Command\:
         resource: '../../Command'
 

@@ -1,0 +1,9 @@
+en:
+  subject: Hello
+  intro: "Hello %name%, here is your link."
+  action: Sign in
+
+fr:
+  subject: Bonjour
+  intro: "Bonjour %name%, voici votre lien."
+  action: Se connecter

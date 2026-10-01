@@ -1,0 +1,8 @@
+{#- The text part of every HTML mail sent by MailSenderService: the mail's own
+    template, without the frame, its links written out. -#}
+{% if mail_app_name %}{{ mail_app_name }}
+
+{% endif %}{{ include(mail_template) | mail_text }}
+
+--
+{{ 'WexampleSymfonyMailBundle.mails.layout::footer' | trans }}

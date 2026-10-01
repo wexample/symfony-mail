@@ -2,8 +2,10 @@
 
 namespace Wexample\SymfonyMail\Tests\Fixtures\App;
 
+use Wexample\SymfonyLoader\WexampleSymfonyLoaderBundle;
 use Wexample\SymfonyMail\WexampleSymfonyMailBundle;
 use Wexample\SymfonyTesting\Tests\Fixtures\AbstractFixtureKernel;
+use Wexample\SymfonyTranslations\WexampleSymfonyTranslationsBundle;
 
 class AppKernel extends AbstractFixtureKernel
 {
@@ -15,6 +17,8 @@ class AppKernel extends AbstractFixtureKernel
     protected function getExtraBundles(): iterable
     {
         return [
+            new WexampleSymfonyLoaderBundle(),
+            new WexampleSymfonyTranslationsBundle(),
             new WexampleSymfonyMailBundle(),
         ];
     }

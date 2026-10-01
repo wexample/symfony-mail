@@ -1,10 +1,38 @@
 framework:
+  default_locale: en
+  enabled_locales: [en, fr]
   mailer:
     dsn: 'mailbox://default'
+    headers:
+      From: 'App <no-reply@app.test>'
+
+wexample_symfony_loader:
+  front_paths:
+    front: '%kernel.project_dir%/../front/'
+
+wexample_symfony_mail:
+  app_name: Fixture App
 
 services:
   # Nothing in the fixture app uses the mailer, which the container would
   # otherwise remove: the tests send through it.
   test.mailer:
     alias: Symfony\Component\Mailer\MailerInterface
+    public: true
+
+  test.transport:
+    alias: Symfony\Component\Mailer\Transport\TransportInterface
+    public: true
+
+  test.translator:
+    alias: Wexample\SymfonyTranslations\Translation\Translator
+    public: true
+
+  test.sender:
+    alias: Wexample\SymfonyMail\Service\MailSenderService
+    public: true
+
+  # Every record of the application, to check what a mail leaves in them.
+  logger:
+    class: Wexample\SymfonyMail\Tests\Fixtures\Log\RecordingLogger
     public: true

@@ -1,0 +1,23 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Wexample\SymfonyMail\Command\:
+        resource: '../../Command'
+
+    # Public: an application's functional tests read the mails from it.
+    Wexample\SymfonyMail\Service\MailboxService:
+        public: true
+        arguments:
+            $directory: '%wexample_symfony_mail.mailbox.directory%'
+
+    # Without the dispatcher, the Twig listener never renders a TemplatedEmail
+    # and the mailbox keeps a mail without a body.
+    Wexample\SymfonyMail\Transport\MailboxTransportFactory:
+        arguments:
+            $environment: '%kernel.environment%'
+            $dispatcher: '@event_dispatcher'
+            $logger: '@?logger'
+        tags: [mailer.transport_factory]

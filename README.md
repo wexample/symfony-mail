@@ -1,14 +1,52 @@
 # symfony-mail
 
-Version: 1.0.1
+Version: 2.0.0
+
+## Usage
+
+### Reading the mailbox
+
+From the console:
+
+```bash
+bin/console mail:mailbox-last                      # the last mail
+bin/console mail:mailbox-last ada@example.com      # the last mail delivered to this address, bcc included
+bin/console mail:mailbox-last ada@example.com --link   # its first link only, to follow it from a script
+bin/console mail:mailbox-purge                     # empties the mailbox
+```
+
+From a functional test, through `MailboxService`:
+
+```php
+$mail = static::getContainer()->get(MailboxService::class)->last('ada@example.com');
+
+$client->request('GET', $mail->getFirstLink());
+```
+
+`MailboxMail` carries the subject, the addresses, the HTML and text bodies, the attachments (name, type, size) and every link of the bodies. `getRaw($id)` returns the mail as it would have left.
+
+### Why a summary beside the .eml
+
+The transport has the mail as an object when it keeps it: it writes what the page and the tests need then, so nothing has to parse MIME to read it back.
 
 ## Table of Contents
 
+- [Usage](#usage)
+- [Architecture](#architecture)
 - [Integration in the Suite](#integration-in-the-suite)
+- [Dependencies](#dependencies)
 - [Versioning & Compatibility Policy](#versioning--compatibility-policy)
 - [License](#license)
 - [About us](#about-us)
 - [Migration Notes](#migration-notes)
+
+## Architecture
+
+- `Transport/MailboxTransportFactory` answers the `mailbox://` scheme. It is handed the event dispatcher: the Twig listener renders a `TemplatedEmail` on the `MessageEvent` the transport dispatches, and without it the mail is kept without a body.
+- `Service/MailboxService` owns the directory format: it writes the mails (`store`) and reads them back (`list`, `last`, `find`, `getRaw`, `purge`). Ids start with the time the mail was kept, so sorting the ids sorts the mails; an id that does not match that format never reaches the filesystem.
+- `Class/MailboxMail` is a mail read back from its summary.
+
+Tests run in a fixture kernel (`tests/Fixtures/App`) whose mailer uses `mailbox://default`.
 
 ## Integration in the Suite
 
@@ -19,6 +57,16 @@ This package is part of the Wexample Suite — a collection of high-quality, mod
 The suite includes packages for configuration management, file handling, prompts, and more. Each package can be used independently or as part of the integrated suite.
 
 Visit the [Wexample Suite documentation](https://docs.wexample.com) for the complete package ecosystem.
+
+## Dependencies
+
+- php: >=8.5
+- symfony/mailer: ^7.4
+- symfony/mime: ^7.4 || ^8.0
+- symfony/twig-bridge: ^7.4
+- wexample/symfony-helpers: >=12.0.0
+- wexample/symfony-loader: >=16.0.0
+- wexample/symfony-translations: >=7.0.0
 
 ## Versioning & Compatibility Policy
 

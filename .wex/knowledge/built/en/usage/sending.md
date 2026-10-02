@@ -13,7 +13,7 @@ $sender->send(
 ```
 
 - **Texts beside the template.** `welcome.html.twig` reads its texts from `welcome.trans.yml`, beside it, as `@mail::key`. The subject is `@mail::subject`, unless the mail sets one.
-- **Layout.** The HTML is drawn inside `wexample_symfony_mail.layout`, which carries the application name (`app_name`) and a footer. An application gives its own layout, which may {% raw %}`{% extends '@WexampleSymfonyMailBundle/mails/layout.html.twig' %}`{% endraw %} and override the `header`, `body` or `footer` block. The template it frames is in `mail_template`, the locale in `mail_locale`.
+- **Layout.** The HTML is drawn inside `wexample_symfony_mail.layout`, which carries the application name (`app_name`) and a footer. An application gives its own layout, which may `{% extends '@WexampleSymfonyMailBundle/mails/layout.html.twig' %}` and override the `header`, `body` or `footer` block. The template it frames is in `mail_template`, the locale in `mail_locale`.
 - **Text part.** Built from the same template, without the frame, each link written as `label: URL` (`text_layout`). A mail with only a `textTemplate` is sent as it is, without the frame.
 - **Locale.** The mail is rendered in the locale given, and in the default locale when none is given, never in the request's: the request may be another user's, or there is none when a worker sends.
 - **A recipient entity.** `$sender->sendTo($recipient, $email)` addresses the mail to a `MailRecipientInterface` and renders it in its language when the recipient is also `HasLocaleInterface`. See the cookbook *Send a mail in the recipient's language*.

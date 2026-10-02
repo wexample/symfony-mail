@@ -2,10 +2,10 @@
 
 namespace Wexample\SymfonyMail\Tests\Integration;
 
+use LogicException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Wexample\SymfonyMail\Service\MailSenderService;
-use LogicException;
 use Wexample\SymfonyMail\Tests\Fixtures\Log\RecordingLogger;
 use Wexample\SymfonyMail\Tests\Fixtures\Recipient\Account;
 use Wexample\SymfonyMail\Tests\Fixtures\Recipient\Contact;

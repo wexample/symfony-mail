@@ -1,7 +1,7 @@
 {
   "name": "wexample/symfony-mail",
   "description": "Mails for Symfony: a sender every mail goes through, and a development mailbox",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "type": "library",
   "license": "MIT",
   "autoload": {

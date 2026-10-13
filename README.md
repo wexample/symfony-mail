@@ -1,6 +1,6 @@
 # symfony-mail
 
-Version: 2.0.9
+Version: 2.0.10
 
 ## Usage
 
@@ -64,9 +64,9 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - symfony/mailer: ^7.4
 - symfony/mime: ^7.4 || ^8.0
 - symfony/twig-bridge: ^7.4
-- wexample/symfony-helpers: >=15.0.0
-- wexample/symfony-loader: >=22.0.0
-- wexample/symfony-translations: >=12.0.0
+- wexample/symfony-helpers: >=16.0.0
+- wexample/symfony-loader: >=23.0.0
+- wexample/symfony-translations: >=13.0.0
 
 ## Versioning & Compatibility Policy
 

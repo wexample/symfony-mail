@@ -9,3 +9,60 @@ zh:
 
 ar:
   footer: 'تم إرسال هذا البريد تلقائيًا، يرجى عدم الرد عليه.'
+
+hi:
+  footer: 'यह मेल स्वचालित रूप से भेजा गया है, कृपया इसका जवाब न दें।'
+
+he:
+  footer: 'מייל זה נשלח אוטומטית, אנא אל תגיב לו.'
+
+fa:
+  footer: 'این ایمیل به‌طور خودکار ارسال شده است، لطفاً به آن جواب ندهید.'
+
+ur:
+  footer: 'یہ میل خودکار طور پر بھیجی گئی تھی، براہ کرم اس کا جواب نہ دیں۔'
+
+ja:
+  footer: このメールは自動的に送信されましたので、返信しないでください。
+
+ko:
+  footer: '이 메일은 자동으로 발송되었습니다. 회신하지 마십시오.'
+
+bn:
+  footer: 'এই মেইলটি স্বয়ংক্রিয়ভাবে পাঠানো হয়েছে, দয়া করে এর উত্তর দেবেন না।'
+
+th:
+  footer: 'อีเมลนี้ถูกส่งโดยอัตโนมัติ กรุณาอย่าตอบกลับ'
+
+de:
+  footer: 'Diese E-Mail wurde automatisch gesendet, bitte antworten Sie nicht darauf.'
+
+fi:
+  footer: 'Tämä sähköposti lähetettiin automaattisesti, älä vastaa siihen.'
+
+ru:
+  footer: 'Это письмо было отправлено автоматически, пожалуйста, не отвечайте на него.'
+
+pl:
+  footer: 'Ta wiadomość została wysłana automatycznie, prosimy nie odpowiadać na nią.'
+
+es:
+  footer: 'Este correo fue enviado automáticamente, por favor no responda a él.'
+
+it:
+  footer: 'Questa email è stata inviata automaticamente, si prega di non rispondere.'
+
+pt_BR:
+  footer: 'Este e-mail foi enviado automaticamente, por favor, não responda a ele.'
+
+tr:
+  footer: 'Bu mail otomatik olarak gönderilmiştir, lütfen yanıt vermeyin.'
+
+vi:
+  footer: 'Email này được gửi tự động, vui lòng không trả lời.'
+
+id:
+  footer: 'Email ini dikirim secara otomatis, mohon untuk tidak membalasnya.'
+
+nl:
+  footer: 'Deze e-mail is automatisch verzonden, gelieve er niet op te reageren.'

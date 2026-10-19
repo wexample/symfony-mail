@@ -3,3 +3,9 @@ en:
 
 fr:
   footer: "Ce mail a été envoyé automatiquement, merci de ne pas y répondre."
+
+zh:
+  footer: 该邮件是自动发送的，请勿回复。
+
+ar:
+  footer: 'تم إرسال هذا البريد تلقائيًا، يرجى عدم الرد عليه.'

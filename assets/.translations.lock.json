@@ -1,0 +1,14 @@
+{
+    "mails/layout.ar.yml": {
+        "footer": {
+            "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        }
+    },
+    "mails/layout.zh.yml": {
+        "footer": {
+            "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        }
+    }
+}

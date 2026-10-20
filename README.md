@@ -1,6 +1,6 @@
 # symfony-mail
 
-Version: 2.0.12
+Version: 2.0.13
 
 ## Usage
 
@@ -63,7 +63,7 @@ The suite includes packages for configuration management, file handling, prompts
 - symfony/mime: ^7.4 || ^8.0
 - symfony/twig-bridge: ^7.4
 - wexample/symfony-helpers: >=17.0.0
-- wexample/symfony-loader: >=23.1.0
+- wexample/symfony-loader: >=23.2.0
 - wexample/symfony-translations: >=14.0.0
 
 ## Versioning & Compatibility Policy

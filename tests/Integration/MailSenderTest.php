@@ -140,7 +140,9 @@ class MailSenderTest extends AbstractMailboxTestCase
         );
 
         try {
-            $refusing->send($this->buildGreeting());
+            // To a domain that receives mail: one reserved for tests is not
+            // handed to a real transport at all.
+            $refusing->send($this->buildGreeting()->to('ada@wexample.com'));
             $this->fail('The refusing transport sent the mail.');
         } catch (TransportException) {
         }

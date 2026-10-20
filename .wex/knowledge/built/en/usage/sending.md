@@ -32,3 +32,7 @@ The sender logs nothing. A failure is raised as the transport raised it, without
 ### Answering a mail
 
 The layout's footer asks not to reply, unless the mail names a `Reply-To`: then it says where a reply goes. A contact form's mail, sent to the application with the visitor as `Reply-To`, is answered from the mail client.
+
+### Addresses nobody receives at
+
+A domain reserved for examples and tests — `example.com`, `example.org`, `*.test`, `*.invalid`, `localhost`… (RFC 2606, RFC 6761) — is never handed to a real transport: `ReservedDomainRecipientsSubscriber` takes those recipients out of the envelope, and a mail left with none is not sent. A provider would bounce it, at the sender's reputation, or refuse it and fail the request. The development mailbox keeps them all.

@@ -42,11 +42,13 @@ class ReservedDomainRecipientsSubscriberTest extends TestCase
         $this->assertFalse($this->dispatch('smtp://mail.weeger.io', 'someone@myexample.com', 'a@contest')->isRejected());
     }
 
-    public function testTheMailboxKeepsThemAll(): void
+    public function testATransportDeliveringNothingKeepsThemAll(): void
     {
-        $event = $this->dispatch('mailbox:///var/mailbox', 'active@example.com');
+        foreach (['mailbox:///var/mailbox', 'null://'] as $transport) {
+            $event = $this->dispatch($transport, 'active@example.com');
 
-        $this->assertFalse($event->isRejected());
-        $this->assertCount(1, $event->getEnvelope()->getRecipients());
+            $this->assertFalse($event->isRejected());
+            $this->assertCount(1, $event->getEnvelope()->getRecipients());
+        }
     }
 }

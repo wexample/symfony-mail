@@ -15,11 +15,14 @@ use Wexample\SymfonyMail\Transport\MailboxTransportFactory;
  * fails the request sending it — a demo account signing in.
  *
  * Those recipients are taken out of the envelope; a mail left with none is
- * not sent. The development mailbox keeps them all: reading such mails is
- * what it is for.
+ * not sent. A transport that delivers nothing is left alone: the development
+ * mailbox keeps them all — reading such mails is what it is for —, and
+ * `null://`, which tests count mails on, sends nothing anyway.
  */
 class ReservedDomainRecipientsSubscriber implements EventSubscriberInterface
 {
+    private const array NOT_DELIVERING_SCHEMES = [MailboxTransportFactory::SCHEME, 'null'];
+
     private const array RESERVED_DOMAINS = ['example', 'example.com', 'example.net', 'example.org', 'test', 'invalid', 'localhost'];
 
     public static function getSubscribedEvents(): array
@@ -29,8 +32,10 @@ class ReservedDomainRecipientsSubscriber implements EventSubscriberInterface
 
     public function onMessage(MessageEvent $event): void
     {
-        if (str_starts_with($event->getTransport(), MailboxTransportFactory::SCHEME . '://')) {
-            return;
+        foreach (self::NOT_DELIVERING_SCHEMES as $scheme) {
+            if (str_starts_with($event->getTransport(), $scheme . '://')) {
+                return;
+            }
         }
 
         $envelope = $event->getEnvelope();

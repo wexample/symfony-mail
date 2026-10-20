@@ -5,10 +5,14 @@ namespace Wexample\SymfonyMail\Tests\Integration;
 use LogicException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportException;
+use Wexample\SymfonyMail\Entity\Mail;
+use Wexample\SymfonyMail\Enum\MailStatus;
+use Wexample\SymfonyMail\Repository\MailRepository;
 use Wexample\SymfonyMail\Service\MailSenderService;
 use Wexample\SymfonyMail\Tests\Fixtures\Log\RecordingLogger;
 use Wexample\SymfonyMail\Tests\Fixtures\Recipient\Account;
 use Wexample\SymfonyMail\Tests\Fixtures\Recipient\Contact;
+use Wexample\SymfonyMail\Tests\Fixtures\Transport\DeliveringTransport;
 use Wexample\SymfonyMail\Tests\Fixtures\Transport\RefusingTransport;
 use Wexample\SymfonyTranslations\Translation\Translator;
 
@@ -125,6 +129,58 @@ class MailSenderTest extends AbstractMailboxTestCase
         $this->assertSame("Un avis en texte seul.\n", $mail->text);
     }
 
+    public function testTheJournalKeepsAMailWithoutItsBody(): void
+    {
+        $this->getSender()->send($this->buildGreeting());
+
+        $mail = $this->getJournal()[0];
+
+        $this->assertSame(MailStatus::SENT, $mail->getStatus());
+        $this->assertSame(['ada@app.test'], $mail->getTo());
+        $this->assertSame(['"App" <no-reply@app.test>'], $mail->getFrom());
+        $this->assertSame('Hello', $mail->getSubject());
+        $this->assertSame('@front/mails/greeting.html.twig', $mail->getTemplate());
+        $this->assertFalse($mail->isBodyKept());
+    }
+
+    public function testTheJournalKeepsTheBodyWhenAsked(): void
+    {
+        $this->getSender()->send($this->buildGreeting(), keepBody: true);
+
+        $mail = $this->getJournal()[0];
+
+        $this->assertStringContainsString('Hello Ada, here is your link.', (string) $mail->getText());
+        $this->assertStringContainsString('Hello Ada, here is your link.', (string) $this->getMailbox()->last()->text);
+    }
+
+    public function testAMailForNobodyIsJournaledAsDropped(): void
+    {
+        // The mailbox keeps every mail; a transport that delivers drops this one.
+        $sender = new MailSenderService(
+            new DeliveringTransport(static::getContainer()->get('event_dispatcher')),
+            $this->getTranslator(),
+            '@WexampleSymfonyMailBundle/mails/layout.html.twig',
+            '@WexampleSymfonyMailBundle/mails/layout.txt.twig',
+            null,
+            'en',
+            static::getContainer()->get(MailRepository::class),
+            static::getContainer()->get('twig'),
+        );
+
+        $this->assertNull($sender->send($this->buildGreeting()));
+        $this->assertSame(MailStatus::DROPPED, $this->getJournal()[0]->getStatus());
+    }
+
+    /**
+     * @return list<Mail>
+     */
+    private function getJournal(): array
+    {
+        $this->getEntityManager()->clear();
+
+        return static::getContainer()->get(MailRepository::class)->findLatest(10);
+    }
+
     public function testASecretNeverReachesTheLogs(): void
     {
         $logger = static::getContainer()->get('logger');
@@ -137,6 +193,8 @@ class MailSenderTest extends AbstractMailboxTestCase
             '@WexampleSymfonyMailBundle/mails/layout.txt.twig',
             null,
             'en',
+            static::getContainer()->get(MailRepository::class),
+            static::getContainer()->get('twig'),
         );
 
         try {

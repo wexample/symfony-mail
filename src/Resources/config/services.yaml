@@ -17,6 +17,9 @@ services:
     Wexample\SymfonyMail\EventSubscriber\:
         resource: '../../EventSubscriber'
 
+    Wexample\SymfonyMail\Repository\:
+        resource: '../../Repository'
+
     Wexample\SymfonyMail\Command\:
         resource: '../../Command'
 

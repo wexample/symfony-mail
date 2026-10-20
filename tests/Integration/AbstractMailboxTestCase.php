@@ -3,6 +3,8 @@
 namespace Wexample\SymfonyMail\Tests\Integration;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Wexample\SymfonyMail\Service\MailboxService;
 
@@ -12,6 +14,18 @@ abstract class AbstractMailboxTestCase extends KernelTestCase
     {
         self::bootKernel();
         $this->getMailbox()->purge();
+
+        // The journal's table, in the fixture's in-memory database.
+        $entityManager = static::getContainer()->get('doctrine.orm.entity_manager');
+        $schemaTool = new SchemaTool($entityManager);
+        $metadata = $entityManager->getMetadataFactory()->getAllMetadata();
+        $schemaTool->dropSchema($metadata);
+        $schemaTool->createSchema($metadata);
+    }
+
+    protected function getEntityManager(): EntityManagerInterface
+    {
+        return static::getContainer()->get('doctrine.orm.entity_manager');
     }
 
     protected function getMailbox(): MailboxService

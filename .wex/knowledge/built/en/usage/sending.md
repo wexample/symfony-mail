@@ -36,3 +36,11 @@ The layout's footer asks not to reply, unless the mail names a `Reply-To`: then 
 ### Addresses nobody receives at
 
 A domain reserved for examples and tests — `example.com`, `example.org`, `*.test`, `*.invalid`, `localhost`… (RFC 2606, RFC 6761) — is never handed to a real transport: `ReservedDomainRecipientsSubscriber` takes those recipients out of the envelope, and a mail left with none is not sent. A provider would bounce it, at the sender's reputation, or refuse it and fail the request. The development mailbox keeps them all.
+
+### The journal
+
+Every mail `MailSenderService` sends is recorded as a `Mail` (table `mail`) before it leaves: its sender, recipients, `Reply-To`, subject, template, locale, and how it ended — `sent`, `failed` (the transport's error still goes up to the caller), `dropped` (no recipient receives), or `pending` when the request died mid-way. A transport refusing a mail loses nothing.
+
+Its body is kept only when the caller says so — `send($email, keepBody: true)` —, for a mail carrying no secret: a contact message. A mail with a link or a code is never sent that way, or the journal would hold what opens an account. `MailRepository::findLatest()` reads them back; symfony-mail-ds draws them for the administrator.
+
+The application creates the table with a migration; every mail sent needs it, test databases included.

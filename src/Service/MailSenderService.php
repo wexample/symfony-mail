@@ -3,12 +3,17 @@
 namespace Wexample\SymfonyMail\Service;
 
 use LogicException;
+use Symfony\Bridge\Twig\Mime\BodyRenderer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Address;
+use Wexample\SymfonyMail\Enum\MailStatus;
+use Wexample\SymfonyMail\Repository\MailRepository;
 use Wexample\SymfonyMail\Interface\MailRecipientInterface;
 use Wexample\SymfonyTranslations\Interface\HasLocaleInterface;
+use Twig\Environment;
 use Wexample\SymfonyTranslations\Translation\Translator;
 
 /**
@@ -31,6 +36,11 @@ use Wexample\SymfonyTranslations\Translation\Translator;
  * background, queue a message naming what to send — never the secret — and
  * call this from its handler, where the secret is built.
  *
+ * Each mail is recorded in the journal (Mail) before it leaves, and its end
+ * after: sent, failed, or dropped for want of a recipient who receives. Its
+ * body only when the caller says it may be kept (`keepBody`): never a mail
+ * carrying a link or a code.
+ *
  * Nothing here logs; a failure bubbles up as the transport raised it.
  */
 class MailSenderService
@@ -48,16 +58,20 @@ class MailSenderService
         private readonly string $textLayout,
         private readonly ?string $appName,
         private readonly string $defaultLocale,
+        private readonly MailRepository $journal,
+        private readonly Environment $twig,
     ) {
     }
 
     /**
      * @param string|null $locale the recipient's language; the default locale when unknown
+     * @param bool $keepBody whether the journal keeps what the mail says: only for one carrying no secret
      * @throws LogicException for a mail without a template, whose texts would have nowhere to come from
      */
     public function send(
         TemplatedEmail $email,
-        ?string $locale = null
+        ?string $locale = null,
+        bool $keepBody = false
     ): ?SentMessage {
         $template = $email->getHtmlTemplate()
             ?? $email->getTextTemplate()
@@ -85,7 +99,29 @@ class MailSenderService
                 $email->subject($this->translator->trans('@mail::subject', locale: $locale));
             }
 
-            return $this->transport->send($email);
+            $mail = $this->journal->createNewMail($email, $template);
+
+            if ($keepBody) {
+                // Drawn now rather than by the transport, to be kept; the
+                // transport finds it drawn and leaves it. Twig's own renderer,
+                // which exists only where the mailer is configured.
+                (new BodyRenderer($this->twig))->render($email);
+                $mail->keepBody($email->getHtmlBody(), $email->getTextBody());
+            }
+
+            $this->journal->save($mail, flush: true);
+
+            try {
+                $sent = $this->transport->send($email);
+            } catch (TransportExceptionInterface $exception) {
+                $this->journal->saveStatus($mail, MailStatus::FAILED);
+
+                throw $exception;
+            }
+
+            $this->journal->saveStatus($mail, null === $sent ? MailStatus::DROPPED : MailStatus::SENT, $sent);
+
+            return $sent;
         } finally {
             $this->translator->revertDomain(Translator::DOMAIN_TYPE_MAIL);
         }

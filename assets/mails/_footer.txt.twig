@@ -1,0 +1,7 @@
+{#- A mail naming whom to reply to says so; any other is not to be replied to. -#}
+{%- set reply_to = email.replyTo|first -%}
+{%- if reply_to -%}
+    {{- 'WexampleSymfonyMailBundle.mails.layout::footer_reply_to' | trans({ '%reply_to%': reply_to.address }) -}}
+{%- else -%}
+    {{- 'WexampleSymfonyMailBundle.mails.layout::footer' | trans -}}
+{%- endif -%}

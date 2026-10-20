@@ -1,8 +1,10 @@
 en:
   footer: This mail was sent automatically, please do not reply to it.
+  footer_reply_to: "A reply to this mail goes to %reply_to%."
 
 fr:
   footer: "Ce mail a été envoyé automatiquement, merci de ne pas y répondre."
+  footer_reply_to: "Une réponse à ce mail parvient à %reply_to%."
 
 zh:
   footer: 该邮件是自动发送的，请勿回复。

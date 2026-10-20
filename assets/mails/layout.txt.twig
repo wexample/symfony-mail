@@ -5,4 +5,4 @@
 {% endif %}{{ include(mail_template) | mail_text }}
 
 --
-{{ 'WexampleSymfonyMailBundle.mails.layout::footer' | trans }}
+{{ include('@WexampleSymfonyMailBundle/mails/_footer.txt.twig') }}

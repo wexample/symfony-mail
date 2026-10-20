@@ -28,3 +28,7 @@ To send in the background anyway, queue a message that names what to send and ne
 ### Logs
 
 The sender logs nothing. A failure is raised as the transport raised it, without the rendered mail. A caller that records failures records the kind of mail and the account, never the body, the link or the code.
+
+### Answering a mail
+
+The layout's footer asks not to reply, unless the mail names a `Reply-To`: then it says where a reply goes. A contact form's mail, sent to the application with the visitor as `Reply-To`, is answered from the mail client.

@@ -3,11 +3,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.bn.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -15,11 +23,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.es.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -27,11 +43,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.fi.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -39,11 +63,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.hi.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -51,11 +83,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.it.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -63,11 +103,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.ko.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -75,11 +123,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.pl.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -87,11 +143,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.ru.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -99,11 +163,19 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.tr.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     },
@@ -111,17 +183,29 @@
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.vi.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
             "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
+            "engine": "syrtis"
         }
     },
     "mails/layout.zh.yml": {
         "footer": {
             "hash": "c5e05a551ef557cb324734e27762ecc6",
+            "engine": "syrtis"
+        },
+        "footer_reply_to": {
+            "hash": "8291ae65450a3351c0ce2ea19b6472f7",
             "engine": "syrtis"
         }
     }

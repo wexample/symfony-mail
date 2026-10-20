@@ -8,63 +8,84 @@ fr:
 
 zh:
   footer: 该邮件是自动发送的，请勿回复。
+  footer_reply_to: '回复此邮件将发送至 %reply_to%。'
 
 ar:
   footer: 'تم إرسال هذا البريد تلقائيًا، يرجى عدم الرد عليه.'
+  footer_reply_to: 'تذهب الردود على هذا البريد إلى %reply_to%.'
 
 hi:
   footer: 'यह मेल स्वचालित रूप से भेजा गया है, कृपया इसका जवाब न दें।'
+  footer_reply_to: 'इस मेल का जवाब %reply_to% को जाएगा।'
 
 he:
   footer: 'מייל זה נשלח אוטומטית, אנא אל תגיב לו.'
+  footer_reply_to: 'תגובה לדוא״ל הזה הולכת ל- %reply_to%.'
 
 fa:
   footer: 'این ایمیل به‌طور خودکار ارسال شده است، لطفاً به آن جواب ندهید.'
+  footer_reply_to: 'پاسخ به این ایمیل به %reply_to% ارسال می‌شود.'
 
 ur:
   footer: 'یہ میل خودکار طور پر بھیجی گئی تھی، براہ کرم اس کا جواب نہ دیں۔'
+  footer_reply_to: 'اس میل کا جواب %reply_to% کو جائے گا۔'
 
 ja:
   footer: このメールは自動的に送信されましたので、返信しないでください。
+  footer_reply_to: このメールへの返信は%reply_to%に送信されます。
 
 ko:
   footer: '이 메일은 자동으로 발송되었습니다. 회신하지 마십시오.'
+  footer_reply_to: '이 메일에 대한 회신은 %reply_to%으로 전송됩니다.'
 
 bn:
   footer: 'এই মেইলটি স্বয়ংক্রিয়ভাবে পাঠানো হয়েছে, দয়া করে এর উত্তর দেবেন না।'
+  footer_reply_to: 'এই মেইলের উত্তরের জন্য %reply_to% এ যাবে।'
 
 th:
   footer: 'อีเมลนี้ถูกส่งโดยอัตโนมัติ กรุณาอย่าตอบกลับ'
+  footer_reply_to: 'การตอบกลับไปยังอีเมลนี้จะไปยัง %reply_to%.'
 
 de:
   footer: 'Diese E-Mail wurde automatisch gesendet, bitte antworten Sie nicht darauf.'
+  footer_reply_to: 'Eine Antwort auf diese E-Mail geht an %reply_to%.'
 
 fi:
   footer: 'Tämä sähköposti lähetettiin automaattisesti, älä vastaa siihen.'
+  footer_reply_to: 'Tämä sähköpostivastaus menee osoitteeseen %reply_to%.'
 
 ru:
   footer: 'Это письмо было отправлено автоматически, пожалуйста, не отвечайте на него.'
+  footer_reply_to: 'Ответ на это письмо будет отправлен %reply_to%.'
 
 pl:
   footer: 'Ta wiadomość została wysłana automatycznie, prosimy nie odpowiadać na nią.'
+  footer_reply_to: 'Odpowiedź na ten e-mail trafia do %reply_to%.'
 
 es:
   footer: 'Este correo fue enviado automáticamente, por favor no responda a él.'
+  footer_reply_to: 'Una respuesta a este correo va a %reply_to%.'
 
 it:
   footer: 'Questa email è stata inviata automaticamente, si prega di non rispondere.'
+  footer_reply_to: 'Una risposta a questa mail va a %reply_to%.'
 
 pt_BR:
   footer: 'Este e-mail foi enviado automaticamente, por favor, não responda a ele.'
+  footer_reply_to: 'Uma resposta a este e-mail vai para %reply_to%.'
 
 tr:
   footer: 'Bu mail otomatik olarak gönderilmiştir, lütfen yanıt vermeyin.'
+  footer_reply_to: "Bu maile bir cevap %reply_to%'ya gider."
 
 vi:
   footer: 'Email này được gửi tự động, vui lòng không trả lời.'
+  footer_reply_to: 'Một phản hồi cho email này sẽ được gửi đến %reply_to%.'
 
 id:
   footer: 'Email ini dikirim secara otomatis, mohon untuk tidak membalasnya.'
+  footer_reply_to: 'Balasan untuk email ini akan dikirim ke %reply_to%.'
 
 nl:
   footer: 'Deze e-mail is automatisch verzonden, gelieve er niet op te reageren.'
+  footer_reply_to: 'Een antwoord op deze mail gaat naar %reply_to%.'

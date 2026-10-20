@@ -9,11 +9,11 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Address;
-use Wexample\SymfonyMail\Enum\MailStatus;
-use Wexample\SymfonyMail\Repository\MailRepository;
-use Wexample\SymfonyMail\Interface\MailRecipientInterface;
-use Wexample\SymfonyTranslations\Interface\HasLocaleInterface;
 use Twig\Environment;
+use Wexample\SymfonyMail\Enum\MailStatus;
+use Wexample\SymfonyMail\Interface\MailRecipientInterface;
+use Wexample\SymfonyMail\Repository\MailRepository;
+use Wexample\SymfonyTranslations\Interface\HasLocaleInterface;
 use Wexample\SymfonyTranslations\Translation\Translator;
 
 /**

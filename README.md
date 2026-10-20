@@ -1,6 +1,6 @@
 # symfony-mail
 
-Version: 2.0.13
+Version: 3.0.0
 
 ## Usage
 
@@ -59,12 +59,14 @@ The suite includes packages for configuration management, file handling, prompts
 ## Dependencies
 
 - php: >=8.5
+- doctrine/orm: ^3.0
+- doctrine/doctrine-bundle: ^2.13 || ^3.0
 - symfony/mailer: ^7.4
 - symfony/mime: ^7.4 || ^8.0
 - symfony/twig-bridge: ^7.4
 - wexample/symfony-helpers: >=17.0.0
-- wexample/symfony-loader: >=23.2.0
-- wexample/symfony-translations: >=14.0.0
+- wexample/symfony-loader: >=23.3.0
+- wexample/symfony-translations: >=15.0.0
 
 ## Versioning & Compatibility Policy
 

@@ -2,9 +2,9 @@
 
 namespace Wexample\SymfonyMail\Tests\Integration;
 
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Wexample\SymfonyMail\Service\MailboxService;
 

@@ -1,6 +1,6 @@
 # symfony-mail
 
-Version: 3.0.1
+Version: 3.0.2
 
 ## Usage
 
@@ -66,7 +66,7 @@ The suite includes packages for configuration management, file handling, prompts
 - symfony/twig-bridge: ^7.4
 - wexample/symfony-helpers: >=18.0.0
 - wexample/symfony-loader: >=24.0.0
-- wexample/symfony-translations: >=16.0.0
+- wexample/symfony-translations: >=17.0.0
 
 ## Versioning & Compatibility Policy
 

@@ -1,7 +1,7 @@
 {
   "name": "wexample/symfony-mail",
   "description": "Mails for Symfony: a sender every mail goes through, and a development mailbox",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "type": "library",
   "license": "MIT",
   "autoload": {
@@ -28,7 +28,7 @@
     "symfony/mime": "^7.4 || ^8.0",
     "symfony/twig-bridge": "^7.4",
     "wexample/symfony-helpers": ">=18.0.0",
-    "wexample/symfony-loader": ">=24.0.0",
+    "wexample/symfony-loader": ">=25.0.0",
     "wexample/symfony-translations": ">=17.0.0"
   },
   "require-dev": {

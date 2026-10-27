@@ -11,6 +11,9 @@ services:
             $appName: '%wexample_symfony_mail.app_name%'
             $defaultLocale: '%kernel.default_locale%'
 
+    # Tagged by its interface: symfony-loader checks it (loader:requirements).
+    Wexample\SymfonyMail\Service\MailRequirementProvider: ~
+
     Wexample\SymfonyMail\Twig\:
         resource: '../../Twig'
 

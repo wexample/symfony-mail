@@ -1,6 +1,6 @@
 # symfony-mail
 
-Version: 3.0.5
+Version: 4.0.0
 
 Mails for Symfony: a sender every mail goes through, and a development mailbox
 
@@ -15,6 +15,25 @@ Mails for Symfony: a sender every mail goes through, and a development mailbox
 // config/bundles.php
 Wexample\SymfonyMail\WexampleSymfonyMailBundle::class => ['all' => true],
 ```
+
+### The sender
+
+Every mail leaves from the mailer's sender unless it names its own:
+
+```yaml
+# config/packages/mailer.yaml
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
+        headers:
+            From: '%env(MAILER_FROM)%'
+```
+
+```dotenv
+MAILER_FROM='App <noreply@example.com>'
+```
+
+Both are requirements symfony-loader checks (`loader:requirements`): without them the transport refuses each mail, in a worker, long after.
 
 ### Development mailbox
 

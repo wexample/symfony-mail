@@ -1,6 +1,6 @@
 # symfony-mail
 
-Version: 4.0.5
+Version: 4.0.6
 
 Mails for Symfony: a sender every mail goes through, and a development mailbox
 

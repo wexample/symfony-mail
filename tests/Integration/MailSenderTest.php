@@ -5,6 +5,9 @@ namespace Wexample\SymfonyMail\Tests\Integration;
 use LogicException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportException;
+use Symfony\Component\Mailer\SentMessage;
+use Symfony\Component\Mailer\Transport\AbstractTransport;
+use Twig\Error\RuntimeError;
 use Wexample\SymfonyMail\Entity\Mail;
 use Wexample\SymfonyMail\Enum\MailStatus;
 use Wexample\SymfonyMail\Repository\MailRepository;
@@ -169,6 +172,42 @@ class MailSenderTest extends AbstractMailboxTestCase
 
         $this->assertNull($sender->send($this->buildGreeting()));
         $this->assertSame(MailStatus::DROPPED, $this->getJournal()[0]->getStatus());
+    }
+
+    public function testAMailThatFailsToRenderIsJournaledAsFailed(): void
+    {
+        // Twig fails inside the transport, which renders the mail as it sends
+        // it: not a transport exception, and still a mail that never left.
+        $sender = new MailSenderService(
+            new class(static::getContainer()->get('event_dispatcher')) extends AbstractTransport {
+                protected function doSend(SentMessage $message): void
+                {
+                    throw new RuntimeError('Variable "name" does not exist.');
+                }
+
+                public function __toString(): string
+                {
+                    return 'failing://';
+                }
+            },
+            $this->getTranslator(),
+            '@WexampleSymfonyMailBundle/mails/layout.html.twig',
+            '@WexampleSymfonyMailBundle/mails/layout.txt.twig',
+            null,
+            'en',
+            static::getContainer()->get(MailRepository::class),
+            static::getContainer()->get('twig'),
+        );
+
+        try {
+            // To a domain that receives mail, as one reserved for tests never
+            // reaches the transport.
+            $sender->send($this->buildGreeting()->to('ada@wexample.com'));
+            $this->fail('The failure did not reach the caller.');
+        } catch (RuntimeError) {
+        }
+
+        $this->assertSame(MailStatus::FAILED, $this->getJournal()[0]->getStatus());
     }
 
     /**

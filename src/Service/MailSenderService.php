@@ -5,10 +5,10 @@ namespace Wexample\SymfonyMail\Service;
 use LogicException;
 use Symfony\Bridge\Twig\Mime\BodyRenderer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Address;
+use Throwable;
 use Twig\Environment;
 use Wexample\SymfonyMail\Enum\MailStatus;
 use Wexample\SymfonyMail\Interface\MailRecipientInterface;
@@ -111,9 +111,13 @@ class MailSenderService
 
             $this->journal->save($mail, flush: true);
 
+            // Whatever stops the mail here — the server refusing it as much as
+            // a template failing when the transport renders it — ends it as
+            // failed, or the journal keeps it pending for a mail that will
+            // never leave. The failure itself goes on to the caller.
             try {
                 $sent = $this->transport->send($email);
-            } catch (TransportExceptionInterface $exception) {
+            } catch (Throwable $exception) {
                 $this->journal->saveStatus($mail, MailStatus::FAILED);
 
                 throw $exception;

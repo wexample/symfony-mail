@@ -179,7 +179,7 @@ class MailSenderTest extends AbstractMailboxTestCase
         // Twig fails inside the transport, which renders the mail as it sends
         // it: not a transport exception, and still a mail that never left.
         $sender = new MailSenderService(
-            new class(static::getContainer()->get('event_dispatcher')) extends AbstractTransport {
+            new class (static::getContainer()->get('event_dispatcher')) extends AbstractTransport {
                 protected function doSend(SentMessage $message): void
                 {
                     throw new RuntimeError('Variable "name" does not exist.');
